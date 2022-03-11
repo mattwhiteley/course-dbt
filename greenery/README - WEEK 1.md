@@ -7,10 +7,13 @@
       COUNT(DISTINCT id) 
   FROM
       dbt_matt_w.stg_users;
+'''
 
---On average, how many orders do we receive per hour?
-7.52
-  WITH hourly_orders AS 
+### On average, how many orders do we receive per hour?
+- 7.52
+
+'''
+WITH hourly_orders AS 
   (
   SELECT
       DATE_TRUNC('day',created_at) AS date,
