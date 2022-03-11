@@ -2,17 +2,17 @@
 
 ### How many Users do we have? 
 - 130
-'''
+```
   SELECT 
       COUNT(DISTINCT id) 
   FROM
       dbt_matt_w.stg_users;
-'''
+```
 
 ### On average, how many orders do we receive per hour?
 - 7.52
 
-'''
+```
 WITH hourly_orders AS 
   (
   SELECT
@@ -28,23 +28,23 @@ WITH hourly_orders AS
       AVG(ct_orders) 
   FROM 
       hourly_orders;
-'''      
+```      
 
 ### On average, how long does an order take from being placed to being delivered?
 - 3 days 21:24:11
 
-'''
+```
   SELECT AVG(delivered_at - created_at) AS difference
   FROM 
       dbt_matt_w.stg_orders;
-'''
+```
 
 ### How many users have only made one purchase? Two purchases? Three+ purchases?
 - 1 order:   25
 - 2 orders:  28
 - 3+ orders: 71
 
-'''
+```
   --Doesn't include users who made zero orders
   WITH user_orders AS 
   (
@@ -74,12 +74,12 @@ WITH hourly_orders AS
   WHERE 
       o.order_id is NULL
       OR u.user_guid is NULL;
-'''
+```
 
 ### On average, how many unique sessions do we have per hour?
 - 16.3
 
-'''
+```
   WITH hourly_sessions AS 
   (
   SELECT
@@ -95,4 +95,4 @@ WITH hourly_orders AS
       AVG(ct_sessions) 
   FROM
       hourly_sessions;
-'''
+```
