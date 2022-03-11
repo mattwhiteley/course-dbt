@@ -36,11 +36,12 @@
       dbt_matt_w.stg_orders;
 '''
 
---How many users have only made one purchase? Two purchases? Three+ purchases?
-1 order:   25
-2 orders:  28
-3+ orders: 71
+### How many users have only made one purchase? Two purchases? Three+ purchases?
+- 1 order:   25
+- 2 orders:  28
+- 3+ orders: 71
 
+'''
   --Doesn't include users who made zero orders
   WITH user_orders AS 
   (
@@ -70,9 +71,12 @@
   WHERE 
       o.order_id is NULL
       OR u.user_guid is NULL;
+'''
 
---On average, how many unique sessions do we have per hour?
-16.3
+### On average, how many unique sessions do we have per hour?
+- 16.3
+
+'''
   WITH hourly_sessions AS 
   (
   SELECT
@@ -88,3 +92,4 @@
       AVG(ct_sessions) 
   FROM
       hourly_sessions;
+'''
