@@ -1,72 +1,90 @@
-Welcome to your new dbt project!
+## Week 1 - Answers & SQL:
 
-### Using the starter project
-
-Try running the following commands:
-- dbt run
-- dbt test
-
-
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
-
-
-Week 1 - SQL:
---How many Users do we have?
-select count(*) from dbt_matt_w.stg_users;
+### How many Users do we have? 
+- 130
+'''
+  SELECT 
+      COUNT(DISTINCT id) 
+  FROM
+      dbt_matt_w.stg_users;
 
 --On average, how many orders do we receive per hour?
-WITH hourly_orders as 
-(select
-DATE_TRUNC('day',created_at) as date,
-date_PART('hour',created_at) as hour,
-count(*) as ct_orders
-from dbt_matt_w.stg_orders
-group by 1,2
-order by 1 asc, 2 desc)
-SELECT avg(ct_orders) from hourly_orders;
+7.52
+  WITH hourly_orders AS 
+  (
+  SELECT
+      DATE_TRUNC('day',created_at) AS date,
+      DATE_PART('hour',created_at) AS hour,
+      COUNT(*) as ct_orders
+  FROM dbt_matt_w.stg_orders
+  GROUP BY 1,2
+  ORDER BY 1 asc, 2 desc
+  )
 
---On average, how long does an order take from being placed to being delivered?
-WITH order_delivery_lag as (
-SELECT 
-created_at,
-delivered_at,
-extract (EPOCH from (delivered_at - created_at)) as difference
-FROM dbt_matt_w.stg_orders o
-where o.status='delivered')
-select 
-avg(difference)/3600 as diff_hours,
-avg(difference)/86400 as diff_days from order_delivery_lag;
+  SELECT
+      AVG(ct_orders) 
+  FROM 
+      hourly_orders;
+'''      
 
+### On average, how long does an order take from being placed to being delivered?
+- 3 days 21:24:11
+
+'''
+  SELECT AVG(delivered_at - created_at) AS difference
+  FROM 
+      dbt_matt_w.stg_orders;
+'''
 
 --How many users have only made one purchase? Two purchases? Three+ purchases?
-WITH user_orders as (SELECT user_guid, count(*) as total_orders FROM dbt_matt_w.stg_orders group by user_guid)
-select 
-CASE WHEN total_orders>=3 then '3+' else total_orders::varchar END,
-count(*)
-from user_orders
-group by 1
-order by 1 asc;
+1 order:   25
+2 orders:  28
+3+ orders: 71
 
---Check users who did't order
-select 
-  * 
-from  dbt_matt_w.stg_users u
-FULL OUTER JOIN  dbt_matt_w.stg_orders o 
-on o.user_guid=u.user_guid
-where o.order_id is NULL OR u.user_guid is NULL;
+  --Doesn't include users who made zero orders
+  WITH user_orders AS 
+  (
+  SELECT 
+      user_guid, 
+      count(*) AS total_orders 
+  FROM 
+      dbt_matt_w.stg_orders 
+  GROUP BY
+      user_guid)
+  SELECT 
+      CASE WHEN total_orders>=3 then '3+' else total_orders::varchar END,
+      COUNT(*)
+  FROM
+      user_orders
+  GROUP BY 1
+  ORDER BY 1 ASC;
+
+  --Check users who didn't order
+  SELECT 
+    * 
+  FROM
+      dbt_matt_w.stg_users u
+  FULL OUTER JOIN  
+      dbt_matt_w.stg_orders o 
+      ON o.user_guid=u.user_guid
+  WHERE 
+      o.order_id is NULL
+      OR u.user_guid is NULL;
 
 --On average, how many unique sessions do we have per hour?
-WITH hourly_sessions as 
-(select
-DATE_TRUNC('day',created_at) as date,
-date_PART('hour',created_at) as hour,
-count(DISTINCT session_id) as ct_sessions
-from dbt_matt_w.stg_events
-group by 1,2
-order by 1 asc, 2 desc)
-SELECT avg(ct_sessions) from hourly_sessions;
+16.3
+  WITH hourly_sessions AS 
+  (
+  SELECT
+      DATE_TRUNC('day',created_at) AS date,
+      DATE_PART('hour',created_at) AS hour,
+      COUNT(DISTINCT session_id) AS ct_sessions
+  FROM
+      dbt_matt_w.stg_events
+  GROUP BY 1,2
+  ORDER BY 1 ASC, 2 DESC
+  )
+  SELECT 
+      AVG(ct_sessions) 
+  FROM
+      hourly_sessions;
