@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: stg_users
+  - name: stg_addresses
+  - name: stg_events
+  - name: stg_order_items
+  - name: stg_orders
+  #test-todo: created_at is before delviered_at, estimated_delivered_at
+  - name: stg_products
+  - name: stg_promos

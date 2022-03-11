@@ -1,0 +1,48 @@
+version: 2
+
+sources:
+
+  - name: postgres # name of the source 
+    schema: public # this is the schema our raw data lives in
+    database: dbt # this is the name of our database
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+    freshness:
+      warn_after: {count: 24, period: hour}
+      error_after: {count: 48, period: hour}
+
+    tables:
+      - name: users
+        loaded_at_field: created_at
+        description: >
+          Contains demographic information about each user.
+
+      - name: addresses
+        description: >
+          User addresses. Referenced by Orders for delivery address.
+
+      - name: orders
+        loaded_at_field: created_at
+        description: >
+          Customer orders. References: Users, Addresses, Orders, Promos.
+
+      - name: events
+        loaded_at_field: created_at
+        description: >
+          App events for key user interactions
+
+      - name: products
+        description: >
+          Product SKU data - name, price, volume
+
+      - name: order_items
+        description: >
+          Connecting table for order line-items, linking Products -> Orders
+
+      - name: promos
+        description: >
+          Discount code amounts and status: 'inactive', or 'active'
