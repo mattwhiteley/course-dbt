@@ -33,7 +33,7 @@ models:
           - not_null
       - name: product_id
         tests:
-          -not_null
+          - not_null
   - name: stg_orders
     description: Customer orders. References- Users, Addresses, Orders, Promos.
     columns:
@@ -46,10 +46,10 @@ models:
           - not_null
       - name: order_cost
         tests:
-          - positive_value
+          - positive_values
       - name: shipping_cost
         tests:
-          - positive_value
+          - positive_values
   #test-todo: created_at is before delviered_at, estimated_delivered_at
   - name: stg_products
     description: Product SKU data - name, price, volume
@@ -60,10 +60,10 @@ models:
           - unique
       - name: inventory
         tests:
-          - positive_value
+          - positive_values
       - name: price
         tests:
-          - positive_value   
+          - positive_values   
   - name: stg_promos
     description: Discount code amounts and status - 'inactive', or 'active'
     columns:
@@ -73,4 +73,4 @@ models:
           - unique
       - name: discount
         tests:
-          - positive_value
+          - positive_values
