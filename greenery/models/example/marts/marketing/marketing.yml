@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: fact_sessions
+    description: Events aggregated to session-level, for session conversion rates & other on-site metrics
+    columns:
+        - name: session_id
+          description: "The primary key for this table"
+          tests:
+            - unique

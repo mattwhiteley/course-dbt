@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: int_shipping_events
+    description: intermediate table for events related to order shipping
+    columns:
+      - name: event_id
+        description: "The primary key for this table"
+        tests:
+          - unique

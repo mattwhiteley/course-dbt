@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: int_last_24hrs_sales
+    description: intermediate table for last 24hrs of sales (assumes current time is MAX(created_at) for course purposes)
+    columns:
+      - name: product_id
+        description: "The primary key for this table"
+        tests:
+          - unique
+  - name: dim_users_open
+    description: non-PII users & address table for any demographic analysis. Removal of PII allows free use by any internal users
+    columns:
+      - name: product_id
+        description: "The primary key for this table"
+        tests:
+          - unique
