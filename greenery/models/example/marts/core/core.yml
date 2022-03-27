@@ -11,7 +11,7 @@ models:
   - name: dim_users_open
     description: non-PII users & address table for any demographic analysis. Removal of PII allows free use by any internal users
     columns:
-      - name: product_id
+      - name: user_guid
         description: "The primary key for this table"
         tests:
           - unique

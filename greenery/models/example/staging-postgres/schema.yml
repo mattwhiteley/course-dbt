@@ -22,6 +22,12 @@ models:
         tests:
           - not_null
           - unique
+      - name: event_type
+        tests:
+          - dbt_expectations.expect_column_values_to_be_in_set:
+              value_set: ['add_to_cart','checkout','page_view','package_shipped']
+              quote_values: true
+              row_condition: "session_id is not null"
       - name: session_id
         tests:
           - not_null

@@ -93,7 +93,6 @@ e8b6528e-a830-4d03-a027-473b411c7f02|Snake Plant|29|73|0.40
 4cda01b9-62e2-46c5-830f-b7f262a58fb1|Pothos|21|61|0.34
 
 
-
 ## Part 2 - Macros:
 [Created a macro to pivot out items into aggregated columns](https://github.com/mattwhiteley/course-dbt/blob/main/greenery/macros/pivot_items.sql)
 
@@ -104,5 +103,6 @@ e8b6528e-a830-4d03-a027-473b411c7f02|Snake Plant|29|73|0.40
 ## Part 3 - Hooks:
 [Added On Run End Hook to project yml](https://github.com/mattwhiteley/course-dbt/blob/main/greenery/dbt_project.yml)
 
-
 ## Part 4 - Packages:
+Package: [Added dbt_expectations](https://github.com/mattwhiteley/course-dbt/blob/main/greenery/packages.yml)
+Test: [Added 'Expect column values to be in set](https://github.com/mattwhiteley/course-dbt/blob/main/greenery/models/example/staging-postgres/schema.yml) to ensure event labels coming in from the raw source are within the expected list
