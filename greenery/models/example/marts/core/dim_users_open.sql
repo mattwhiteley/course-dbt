@@ -10,7 +10,7 @@ WITH stg_users AS (
     FROM
         {{ ref ('stg_users') }}
 ),
-WITH stg_addresses AS (
+stg_addresses AS (
     SELECT
         *
     FROM
@@ -19,7 +19,7 @@ WITH stg_addresses AS (
 join_transform AS (
     SELECT
         u.user_guid,
-        SUBSTIRNG(u.email, POSITION('@' IN u.email)+1) AS email_suffix, -- keeping this to identify users potentiallu from the same company for corporate orders
+        SUBSTRING(u.email, POSITION('@' IN u.email)+1) AS email_suffix, -- keeping this to identify users potentiallu from the same company for corporate orders
         u.created_at,
         u.updated_at,
         a.zipcode,

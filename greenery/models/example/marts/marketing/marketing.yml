@@ -8,3 +8,6 @@ models:
           description: "The primary key for this table"
           tests:
             - unique
+  - name: fact_product_sessions
+    description: Events aggregated to PRODUCT & SESSION-level for Week 3 conversion rate questions
+
