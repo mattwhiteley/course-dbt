@@ -1,6 +1,6 @@
 # Week 3 Submission
 
-## Product Metrics
+## Part 1 - Product Metrics:
 
 ### Top-line Conversion Rate:
 
@@ -19,3 +19,12 @@ FROM
 ```
 
 ### Conversion Rate by Product:
+
+## Part 2 - Macros:
+
+
+
+## Part 3 - Hooks:
+
+
+## Part 4 - Packages:
