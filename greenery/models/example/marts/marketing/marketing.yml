@@ -10,4 +10,6 @@ models:
             - unique
   - name: fact_product_sessions
     description: Events aggregated to PRODUCT & SESSION-level for Week 3 conversion rate questions
-
+    
+  - name: fact_sessions_wk3
+    description: Events aggregated to session-level. Using the Pivot Items macro to aggregate columns

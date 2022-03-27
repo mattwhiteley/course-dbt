@@ -95,10 +95,14 @@ e8b6528e-a830-4d03-a027-473b411c7f02|Snake Plant|29|73|0.40
 
 
 ## Part 2 - Macros:
+[Created a macro to pivot out items into aggregated columns](https://github.com/mattwhiteley/course-dbt/blob/main/greenery/macros/pivot_items.sql)
 
+[Model calling the Macro](https://github.com/mattwhiteley/course-dbt/blob/main/greenery/models/example/marts/marketing/fact_sessions_wk3.sql)
 
+[Example of the Model pre-macro](https://github.com/mattwhiteley/course-dbt/blob/main/greenery/models/example/marts/marketing/fact_sessions.sql)
 
 ## Part 3 - Hooks:
+[Added On Run End Hook to project yml](https://github.com/mattwhiteley/course-dbt/blob/main/greenery/dbt_project.yml)
 
 
 ## Part 4 - Packages:
