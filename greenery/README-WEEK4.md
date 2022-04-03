@@ -1,13 +1,13 @@
 # Week 4 Submission
 
 ## Part 1 - Snapshots:
-    - Snapshot Model location: https://github.com/mattwhiteley/course-dbt/blob/main/greenery/snapshots/orders_snapshot.sql
+- [Snapshot Model](https://github.com/mattwhiteley/course-dbt/blob/main/greenery/snapshots/orders_snapshot.sql)
 
 ### SQL to check changes:
 
 A core query such as the one below could be used to identify rows that have a non-null `dbt_valid_to` and so have been updated elsewhere - this could power a further model for insights on shipping lags, carrier or address changes etc.
 
-```
+```sql
 WITH updated_orders AS(
     SELECT
         order_id
@@ -35,7 +35,7 @@ WHERE
 ### 2.1 - Funnel Models:
 - Model: [reporting_product_funnel.sql](https://github.com/mattwhiteley/course-dbt/blob/main/greenery/models/example/marts/product/reporting_product_funnel.sql)
 
-- Cohort Year/Week: I added a week/year cohort grouping, which is a method to create time-based cohorts to allow a product team to track funnel performance over time, should a particular release affect customer behaviour in adding products/checking-out
+- Cohort Year/Week: I added a week/year cohort grouping  to allow a product team to track funnel performance over time, should a particular release affect customer behaviour in adding products/checking-out
 
 - Current Performance:
 
@@ -49,7 +49,7 @@ Currently the performance of the funnel is pretty impressive, 81% of users viewi
 
 Generated with:
 
-```
+```sql
 SELECT
     stage AS "Funnel Stage",
     COUNT AS "Sessions",
@@ -62,10 +62,10 @@ FROM
     dbt_matt_w.reporting_product_funnel;
 ```
 
-[ref: PopSQL article on Funnel Analysis](https://popsql.com/sql-templates/marketing/running-a-funnel-analysis)
+ref:[PopSQL article on Funnel Analysis](https://popsql.com/sql-templates/marketing/running-a-funnel-analysis)
 
 ### 2.2 - Exposure:
-- Exposure definition: [exposures.yml] (https://github.com/mattwhiteley/course-dbt/blob/main/greenery/models/example/marts/product/exposures.yml)
+- Exposure definition: [exposures.yml](https://github.com/mattwhiteley/course-dbt/blob/main/greenery/models/example/marts/product/exposures.yml)
 
 ## Part 3 - Reflection Questions:
 
