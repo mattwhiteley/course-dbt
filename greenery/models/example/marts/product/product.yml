@@ -8,3 +8,5 @@ models:
         description: "The primary key for this table"
         tests:
           - unique
+  - name: reporting_product_funnel
+    description: reporting model for product engagement funnels

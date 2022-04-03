@@ -15,6 +15,7 @@ join_transform AS (
         session_id,
         user_guid,
         min(created_at) as session_started_at,
+        max(created_at) as session_ended_at,
     -- using case whens instead of pivot, cos I'm being a bit lazy, sry
         sum(case when event_type='add_to_cart' then 1 else 0 end) as add_to_cart_ct,
         sum(case when event_type='checkout' then 1 else 0 end) as checkout_ct,
